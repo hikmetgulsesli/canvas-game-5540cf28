@@ -14,12 +14,17 @@ export interface PlayPageCanvasGameProps {
   actions?: {
     "start-1"?: () => void;
   };
-
+  highScore?: number | null;
+  message?: string;
 }
 
 export type PlayPageCanvasGameActionCallbacks = NonNullable<PlayPageCanvasGameProps["actions"]>;
 
-export function PlayPageCanvasGame({ actions }: PlayPageCanvasGameProps) {
+export function PlayPageCanvasGame({
+  actions,
+  highScore = null,
+  message = "",
+}: PlayPageCanvasGameProps) {
   return (
     <>
       {/* Route Root Surface: SURF_PLAY_PAGE */}
@@ -41,13 +46,13 @@ export function PlayPageCanvasGame({ actions }: PlayPageCanvasGameProps) {
               {/* High Score Observable */}
               <div className="flex items-center space-x-2 bg-slate-800/80 px-4 py-1.5 rounded-lg border border-slate-700/60">
                 <span className="text-xs uppercase tracking-wider font-semibold text-slate-400">High Score</span>
-                <div className="text-sm font-bold text-amber-400 tabular-nums" data-setfarm-element-ref="E000002" role="status" aria-label="High score" data-observable-refs="OBS_START_GAME_HIGH_SCORE_VALUE"></div>
+                <div className="text-sm font-bold text-amber-400 tabular-nums" data-setfarm-element-ref="E000002" role="status" aria-label="High score" data-observable-refs="OBS_START_GAME_HIGH_SCORE_VALUE" data-value={highScore === null ? "" : String(highScore)}>{highScore === null ? "" : highScore}</div>
               </div>
       
               {/* Game Status Observable */}
               <div className="flex items-center space-x-2 bg-slate-800/80 px-4 py-1.5 rounded-lg border border-slate-700/60">
                 <span className="text-xs uppercase tracking-wider font-semibold text-slate-400">Status</span>
-                <div className="text-sm font-medium text-emerald-400" data-setfarm-element-ref="E000003" role="status" aria-label="Game status" data-observable-refs="OBS_START_GAME_GAME_STARTED_MESSAGE"></div>
+                <div className="text-sm font-medium text-emerald-400" data-setfarm-element-ref="E000003" role="status" aria-label="Game status" data-observable-refs="OBS_START_GAME_GAME_STARTED_MESSAGE" data-value={message}>{message}</div>
               </div>
             </div>
           </header>
